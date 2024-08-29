@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -59,11 +65,36 @@
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
+@layer utilities {
+  .flex-center {
+    @apply flex items-center justify-center;
   }
-  body {
-    @apply bg-background text-foreground;
+
+  .text-12 {
+    @apply text-[12px] leading-normal;
+  }
+
+  .text-14 {
+    @apply text-[14px] leading-normal;
+  }
+
+  .text-16 {
+    @apply text-[16px] leading-normal;
+  }
+
+  .text-18 {
+    @apply text-[18px] leading-normal;
+  }
+
+  .text-20 {
+    @apply text-[20px] leading-normal;
+  }
+
+  .text-24 {
+    @apply text-[24px] leading-normal;
+  }
+
+  .text-32 {
+    @apply text-[32px] leading-normal;
   }
 }
