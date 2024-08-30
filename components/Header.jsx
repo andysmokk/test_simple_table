@@ -1,9 +1,20 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+
 import Combobox from "./Combobox";
 import ModeToggle from "./ModeToggle";
 import Searchbar from "./Searchbar";
 import { Button } from "./ui/button";
 
 const Header = () => {
+  const router = useRouter();
+
+  const handleSearch = (e) => {
+    const query = e.target.value;
+    router.push(`/?search=${query}`);
+  };
+
   return (
     <div className="flex justify-between px-4 py-4">
       <div className="flex justify-between gap-3">
@@ -13,7 +24,7 @@ const Header = () => {
         </div>
         <div className="flex gap-6 items-center">
           <p className="text-14 font-bold">Entries</p>
-          <Searchbar />
+          <Searchbar handleSearch={handleSearch} />
         </div>
       </div>
       <div className="flex gap-3">

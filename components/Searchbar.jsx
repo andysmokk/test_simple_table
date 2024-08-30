@@ -1,10 +1,20 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 
 import { Input } from "./ui/input";
 
-const Searchbar = () => {
+const Searchbar = ({ handleSearch }) => {
+  const [searchTherm, setSearchTherm] = useState("");
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSearchTherm(value);
+    handleSearch(e);
+  };
+
+
   return (
     <div className="searchbar">
       {/* <Image
@@ -16,8 +26,8 @@ const Searchbar = () => {
       /> */}
       <Input
         id="text"
-        // value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        value={searchTherm}
+        onChange={handleChange}
         placeholder="Search..."
         className="rounded-lg dark:placeholder:text-white-1 placeholder:font-medium
          dark:bg-basicBg-dark border-white w-[218px]"

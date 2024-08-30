@@ -4,10 +4,11 @@ import MainTable from "../components/MainTable";
 
 export default function Home() {
   return (
-    <main className="dark:bg-basicBg-dark">
+    <div className="dark:bg-basicBg-dark">
       <Header />
-      <MainTable />
-      {/* <ModeToggle /> */}
-    </main>
+      <main>
+        <MainTable />
+      </main>
+    </div>
   );
 }
