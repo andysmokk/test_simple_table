@@ -40,7 +40,7 @@ const numberOfRows = [
   },
 ];
 
-export const Combobox = () => {
+const Combobox = () => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 
@@ -90,3 +90,5 @@ export const Combobox = () => {
     </Popover>
   );
 };
+
+export default Combobox;

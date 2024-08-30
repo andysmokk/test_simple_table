@@ -1,5 +1,5 @@
-import { Combobox } from "./Combobox";
-import { ModeToggle } from "./ModeToggle";
+import Combobox from "./Combobox";
+import ModeToggle from "./ModeToggle";
 import Searchbar from "./Searchbar";
 import { Button } from "./ui/button";
 

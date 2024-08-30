@@ -17,6 +17,9 @@ module.exports = {
       },
     },
     extend: {
+      padding: {
+        6.5: "26px",
+      },
       colors: {
         bg: {
           light: "#ffffff",
@@ -25,6 +28,10 @@ module.exports = {
         basicBg: {
           light: "#ffffff",
           dark: "#1D1E42",
+        },
+        tableCellBg: {
+          light: "#ffffff",
+          dark: "#26264F",
         },
         text: {
           light: "#000000",
