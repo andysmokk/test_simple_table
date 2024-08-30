@@ -7,12 +7,12 @@ import LoaderSpinner from "@/components/LoaderSpinner";
 export default function Home() {
   return (
     <>
-      <Suspense fallback={<LoaderSpinner size={40} />}>
-        <Header />
-        <main>
+      <Header />
+      <main>
+        <Suspense fallback={<LoaderSpinner size={40} />}>
           <MainTable />
-        </main>
-      </Suspense>
+        </Suspense>
+      </main>
     </>
   );
 }
