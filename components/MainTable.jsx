@@ -59,19 +59,6 @@ const MainTable = () => {
     );
   };
 
-  // const getStatusColor = (status) => {
-  //   switch (status) {
-  //     case "Cancelled":
-  //       return "text-status-red bg-bgStatus-red";
-  //     case "Delivered":
-  //       return "text-status-green bg-bgStatus-green";
-  //     case "Process":
-  //       return "text-status-orange bg-bgStatus-orange";
-  //     default:
-  //       return "text-gray-500 bg-gray-100";
-  //   }
-  // };
-
   return (
     <div className="grid-container  ">
       <Table className="table-fixed w-full">
@@ -161,7 +148,9 @@ const MainTable = () => {
                     height={32}
                     className="object-cover rounded-lg flex-shrink-0 flex-grow-0 w-8 h-8"
                   />
-                  <p className="truncate">{customer.productName}</p>
+                  <span className="truncate font-medium">
+                    {customer.productName}
+                  </span>
                   <div
                     className="text-16 absolute left-11 hidden mt-2 bg-gray-200
                dark:bg-black text-white rounded-lg p-2 group-hover:block z-10"
@@ -170,14 +159,24 @@ const MainTable = () => {
                   </div>
                 </div>
               </TableCell>
-              <TableCell className=" ">{customer.customer}</TableCell>
-              <TableCell className=" ">{customer.date}</TableCell>
-              <TableCell className=" ">${customer.amount}</TableCell>
-              <TableCell className=" ">{customer.paymentMode}</TableCell>
+              <TableCell>
+                <span className="font-medium">{customer.customer}</span>
+              </TableCell>
+              <TableCell>
+                <span className="font-medium">
+                  {customer.date.split("-").reverse().join("/")}
+                </span>
+              </TableCell>
+              <TableCell>
+                <span className="font-medium">{customer.amount}</span>$
+              </TableCell>
+              <TableCell>
+                <span className="font-medium">{customer.paymentMode}</span>
+              </TableCell>
               <TableCell>
                 <span
                   className={cn(
-                    "py-2 px-4 bg-slate-500 rounded-full text-center",
+                    "py-2 px-4 bg-slate-500 rounded-full text-center font-medium",
                     getStatusColor(customer.status)
                   )}
                 >

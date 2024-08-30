@@ -36,7 +36,7 @@ const PaginationComponent = ({
         href="#"
         onClick={(e) => handleClick(e, page)}
         className={cn(
-          "bg-white-2 dark:bg-bg-dark dark:hover:bg-accent dark:focus:bg-accent rounded-xl",
+          "bg-white-2 dark:bg-bg-dark dark:hover:bg-accent dark:focus:bg-accent rounded-xl font-medium",
           currentPage === page &&
             "text-white-1 font-bold bg-violet-1 dark:!bg-violet-1"
         )}
