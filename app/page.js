@@ -7,8 +7,14 @@ import LoaderSpinner from "@/components/LoaderSpinner";
 export default function Home() {
   return (
     <>
-      <Header />
-      <Suspense fallback={<LoaderSpinner size={40} />}>
+      <Suspense
+        fallback={
+          <div className="flex-center w-full">
+            <LoaderSpinner size={40} />
+          </div>
+        }
+      >
+        <Header />
         <main>
           <MainTable />
         </main>
