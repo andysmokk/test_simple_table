@@ -13,7 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={manrope.className}>
+      <body className={`${manrope.className} h-screen dark:bg-basicBg-dark`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

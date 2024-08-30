@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import {
@@ -18,9 +18,11 @@ import LoaderSpinner from "@/components/LoaderSpinner";
 
 const MainTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [itemsPerPage, setItemsPerPage] = useState("10");
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   useEffect(() => {
     setLoading(true);
@@ -28,15 +30,18 @@ const MainTable = () => {
     const query = searchParams.get("search") || "";
     setSearchTerm(query);
 
-    const itemsCount = searchParams.get("itemsPerPage") || "10";
+    const itemsCount = parseInt(searchParams.get("itemsPerPage") || "10", 10);
     setItemsPerPage(itemsCount);
+
+    const page = parseInt(searchParams.get("page") || "1", 10);
+    setCurrentPage(page);
 
     setLoading(false);
   }, [searchParams]);
 
   const result = searchResult(searchTerm);
-
-  const paginatedData = result.slice(0, parseInt(itemsPerPage, 10));
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedData = result.slice(startIndex, startIndex + itemsPerPage);
 
   if (loading) {
     return (
@@ -46,8 +51,14 @@ const MainTable = () => {
     );
   }
 
+  const handlePageChange = (page) => {
+    router.push(
+      `/?itemsPerPage=${itemsPerPage}&search=${searchTerm}&page=${page}`
+    );
+  };
+
   return (
-    <>
+    <div className="grid-container  ">
       <Table className="table-fixed w-full">
         <TableHeader>
           <TableRow className="">
@@ -116,8 +127,13 @@ const MainTable = () => {
           ))}
         </TableBody>
       </Table>
-      <Pagination />
-    </>
+      <Pagination
+        totalItems={result.length}
+        currentPage={currentPage}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+      />
+    </div>
   );
 };
 

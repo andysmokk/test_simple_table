@@ -43,6 +43,7 @@ module.exports = {
         white: {
           1: "#FFFFFF",
           2: "#E0E0E0",
+          3: "#9E9E9E",
         },
         violet: {
           1: "#624DE3",
