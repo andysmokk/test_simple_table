@@ -20,6 +20,9 @@ module.exports = {
       padding: {
         6.5: "26px",
       },
+      height: {
+        "screen-88.5": "88.5vh",
+      },
       colors: {
         bg: {
           light: "#ffffff",

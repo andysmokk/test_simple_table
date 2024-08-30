@@ -14,18 +14,37 @@ import {
 } from "@/components/ui/table";
 import Pagination from "./PaginationComponent";
 import { searchResult } from "@/lib/actions/search.actions";
+import LoaderSpinner from "@/components/LoaderSpinner";
 
 const MainTable = () => {
-  const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
+  const [itemsPerPage, setItemsPerPage] = useState("10");
+  const [loading, setLoading] = useState(true);
+  const searchParams = useSearchParams();
 
   useEffect(() => {
+    setLoading(true);
+
     const query = searchParams.get("search") || "";
     setSearchTerm(query);
+
+    const itemsCount = searchParams.get("itemsPerPage") || "10";
+    setItemsPerPage(itemsCount);
+
+    setLoading(false);
   }, [searchParams]);
 
   const result = searchResult(searchTerm);
-  console.log("🚀 ~ MainTable ~ result:", result);
+
+  const paginatedData = result.slice(0, parseInt(itemsPerPage, 10));
+
+  if (loading) {
+    return (
+      <div className="flex-center h-screen-88.5 w-full">
+        <LoaderSpinner size={40} />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -59,7 +78,7 @@ const MainTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {result.map((customer) => (
+          {paginatedData.map((customer) => (
             <TableRow
               key={customer.trackingID}
               className="odd:bg-gray-100 dark:odd:bg-tableCellBg-dark"

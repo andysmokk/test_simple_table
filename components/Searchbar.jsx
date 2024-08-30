@@ -2,18 +2,28 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { Input } from "./ui/input";
 
-const Searchbar = ({ handleSearch }) => {
-  const [searchTherm, setSearchTherm] = useState("");
+const Searchbar = () => {
+  const searchParams = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState(
+    searchParams.get("search") || ""
+  );
+  const router = useRouter();
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setSearchTherm(value);
-    handleSearch(e);
+  const handleSearch = (e) => {
+    const query = e.target.value;
+    setSearchTerm(query);
+    const itemsCount = searchParams.get("itemsPerPage") || "10";
+
+    if (query) {
+      router.push(`/?itemsPerPage=${itemsCount}&search=${query}`);
+    } else {
+      router.push(`/?itemsPerPage=${itemsCount}`);
+    }
   };
-
 
   return (
     <div className="searchbar">
@@ -26,8 +36,8 @@ const Searchbar = ({ handleSearch }) => {
       /> */}
       <Input
         id="text"
-        value={searchTherm}
-        onChange={handleChange}
+        value={searchTerm}
+        onChange={handleSearch}
         placeholder="Search..."
         className="rounded-lg dark:placeholder:text-white-1 placeholder:font-medium
          dark:bg-basicBg-dark border-white w-[218px]"

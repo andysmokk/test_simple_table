@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 
 import { cn } from "@/lib/utils";
@@ -16,33 +18,38 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-
-const numberOfRows = [
-  {
-    value: "5",
-    label: "5",
-  },
-  {
-    value: "10",
-    label: "10",
-  },
-  {
-    value: "15",
-    label: "15",
-  },
-  {
-    value: "20",
-    label: "20",
-  },
-  {
-    value: "25",
-    label: "25",
-  },
-];
+import { numberOfRows } from "@/constants/index";
+import LoaderSpinner from "@/components/LoaderSpinner";
 
 const Combobox = () => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
+  const [loading, setLoading] = useState(true);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  useEffect(() => {
+    setLoading(true);
+
+    const itemsCount = searchParams.get("itemsPerPage") || "10";
+    setValue(itemsCount);
+
+    setLoading(false);
+  }, [searchParams]);
+
+  const handleSelect = (currentValue) => {
+    const newValue = currentValue === value ? "" : currentValue;
+    setValue(newValue);
+    setOpen(false);
+
+    const searchQuery = searchParams.get("search") || "";
+
+    if (searchQuery) {
+      router.push(`/?itemsPerPage=${newValue}&search=${searchQuery}`);
+    } else {
+      router.push(`/?itemsPerPage=${newValue}`);
+    }
+  };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -54,10 +61,20 @@ const Combobox = () => {
           className="w-[55px] gap-1 bg-white-2 py-2 px-2 text-black
            font-medium dark:bg-bg-dark dark:text-text-dark dark:hover:bg-accent dark:focus:bg-accent"
         >
-          {value
-            ? numberOfRows.find((number) => number.value === value)?.label
-            : "5"}
-          <CaretSortIcon className="h-4 w-4 shrink-0 opacity-50" />
+          {!loading ? (
+            value ? (
+              numberOfRows.find((number) => number.value === value)?.label
+            ) : (
+              "10"
+            )
+          ) : (
+            <div className="flex-center w-full">
+              <LoaderSpinner size={20} />
+            </div>
+          )}
+          {!loading && (
+            <CaretSortIcon className="h-4 w-4 shrink-0 opacity-50" />
+          )}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[70px] p-0">
@@ -69,10 +86,7 @@ const Combobox = () => {
                   className="cursor-pointer"
                   key={number.value}
                   value={number.value}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
-                    setOpen(false);
-                  }}
+                  onSelect={() => handleSelect(number.value)}
                 >
                   {number.label}
                   <CheckIcon

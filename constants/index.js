@@ -18,3 +18,26 @@ const convertKeysOfObject = (obj) => {
 const transformedData = dataArray.map((item) => convertKeysOfObject(item));
 
 export const customersData = transformedData;
+
+export const numberOfRows = [
+  {
+    value: "5",
+    label: "5",
+  },
+  {
+    value: "10",
+    label: "10",
+  },
+  {
+    value: "15",
+    label: "15",
+  },
+  {
+    value: "20",
+    label: "20",
+  },
+  {
+    value: "25",
+    label: "25",
+  },
+];
