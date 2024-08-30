@@ -23,6 +23,8 @@ const MainTable = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -38,12 +40,32 @@ const MainTable = () => {
     const page = parseInt(searchParams.get("page") || "1", 10);
     setCurrentPage(page);
 
+    const result = searchResult(query);
+    setData(result);
+    setFilteredData(result);
+
     setLoading(false);
   }, [searchParams]);
 
-  const result = searchResult(searchTerm);
+  const handlePageChange = (page) => {
+    router.push(
+      `/?itemsPerPage=${itemsPerPage}&search=${searchTerm}&page=${page}`
+    );
+  };
+
+  const handleDelete = (trackingID) => {
+    const updatedData = filteredData.filter(
+      (customer) => customer.trackingID !== trackingID
+    );
+    setFilteredData(updatedData);
+    setData(data.filter((customer) => customer.trackingID !== trackingID));
+  };
+
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedData = result.slice(startIndex, startIndex + itemsPerPage);
+  const paginatedData = filteredData.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   if (loading) {
     return (
@@ -53,14 +75,8 @@ const MainTable = () => {
     );
   }
 
-  const handlePageChange = (page) => {
-    router.push(
-      `/?itemsPerPage=${itemsPerPage}&search=${searchTerm}&page=${page}`
-    );
-  };
-
   return (
-    <div className="grid-container  ">
+    <div className="grid-container">
       <Table className="table-fixed w-full">
         <TableHeader>
           <TableRow className="">
@@ -194,10 +210,11 @@ const MainTable = () => {
                   />
                   <Image
                     src="/icons/delete.svg"
-                    alt="edit"
+                    alt="delete"
                     width={24}
                     height={24}
                     className="cursor-pointer"
+                    onClick={() => handleDelete(customer.trackingID)}
                   />
                 </div>
               </TableCell>
@@ -206,7 +223,7 @@ const MainTable = () => {
         </TableBody>
       </Table>
       <Pagination
-        totalItems={result.length}
+        totalItems={filteredData.length}
         currentPage={currentPage}
         itemsPerPage={itemsPerPage}
         onPageChange={handlePageChange}
