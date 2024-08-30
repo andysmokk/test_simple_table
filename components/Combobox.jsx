@@ -80,6 +80,15 @@ const Combobox = () => {
               height={10}
             />
           )}
+          {/* {value
+            ? numberOfRows.find((number) => number.value === value)?.label
+            : "10"}
+          <Image
+            src="/icons/caret-down.svg"
+            alt="caret-down"
+            width={10}
+            height={10}
+          /> */}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[70px] p-0">

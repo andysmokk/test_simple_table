@@ -14,9 +14,9 @@ import {
 } from "@/components/ui/table";
 import Pagination from "./PaginationComponent";
 import { searchResult } from "@/lib/actions/search.actions";
-import LoaderSpinner from "@/components/LoaderSpinner";
 import { cn } from "@/lib/utils";
 import { getStatusColor } from "@/lib/utils";
+import LoaderSpinner from "@/components/LoaderSpinner";
 
 const MainTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -68,11 +68,7 @@ const MainTable = () => {
   );
 
   if (loading) {
-    return (
-      <div className="flex-center h-screen-88.5 w-full">
-        <LoaderSpinner size={40} />
-      </div>
-    );
+    return <LoaderSpinner />;
   }
 
   return (
