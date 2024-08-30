@@ -15,6 +15,8 @@ import {
 import Pagination from "./PaginationComponent";
 import { searchResult } from "@/lib/actions/search.actions";
 import LoaderSpinner from "@/components/LoaderSpinner";
+import { cn } from "@/lib/utils";
+import { getStatusColor } from "@/lib/utils";
 
 const MainTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -56,6 +58,19 @@ const MainTable = () => {
       `/?itemsPerPage=${itemsPerPage}&search=${searchTerm}&page=${page}`
     );
   };
+
+  // const getStatusColor = (status) => {
+  //   switch (status) {
+  //     case "Cancelled":
+  //       return "text-status-red bg-bgStatus-red";
+  //     case "Delivered":
+  //       return "text-status-green bg-bgStatus-green";
+  //     case "Process":
+  //       return "text-status-orange bg-bgStatus-orange";
+  //     default:
+  //       return "text-gray-500 bg-gray-100";
+  //   }
+  // };
 
   return (
     <div className="grid-container  ">
@@ -159,7 +174,16 @@ const MainTable = () => {
               <TableCell className=" ">{customer.date}</TableCell>
               <TableCell className=" ">${customer.amount}</TableCell>
               <TableCell className=" ">{customer.paymentMode}</TableCell>
-              <TableCell className=" ">{customer.status}</TableCell>
+              <TableCell>
+                <span
+                  className={cn(
+                    "py-2 px-4 bg-slate-500 rounded-full text-center",
+                    getStatusColor(customer.status)
+                  )}
+                >
+                  {customer.status}
+                </span>
+              </TableCell>
               <TableCell className="flex-center py-6.5">
                 <div className="flex gap-4">
                   <Image

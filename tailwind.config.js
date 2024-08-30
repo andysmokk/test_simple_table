@@ -40,6 +40,16 @@ module.exports = {
           light: "#000000",
           dark: "#ffffff",
         },
+        status: {
+          green: "#1F9254",
+          red: "#A30D11",
+          orange: "#CD6200",
+        },
+        bgStatus: {
+          green: "#EBF9F1",
+          red: "#FBE7E8",
+          orange: "#FEF2E5",
+        },
         white: {
           1: "#FFFFFF",
           2: "#E0E0E0",
