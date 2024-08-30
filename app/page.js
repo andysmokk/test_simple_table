@@ -1,11 +1,8 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense } from "react";
 
-// import Header from "@/components/Header";
-// import MainTable from "@/components/MainTable";
+import Header from "@/components/Header";
+import MainTable from "@/components/MainTable";
 import LoaderSpinner from "@/components/LoaderSpinner";
-
-const Header = lazy(() => import("@/components/Header"));
-const MainTable = lazy(() => import("@/components/MainTable"));
 
 export default function Home() {
   return (
