@@ -19,22 +19,22 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { numberOfRows } from "@/constants/index";
-import LoaderSpinner from "@/components/LoaderSpinner";
+// import LoaderSpinner from "@/components/LoaderSpinner";
 
 const Combobox = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
   const router = useRouter();
 
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
 
     const itemsCount = searchParams.get("itemsPerPage") || "10";
     setValue(itemsCount);
 
-    setLoading(false);
+    // setLoading(false);
   }, [searchParams]);
 
   const handleSelect = (currentValue) => {
@@ -61,7 +61,7 @@ const Combobox = () => {
           className="w-[55px] gap-1 bg-white-2 py-2 px-2 text-black
            font-medium dark:bg-bg-dark dark:text-text-dark dark:hover:bg-accent dark:focus:bg-accent"
         >
-          {!loading ? (
+          {/* {!loading ? (
             value ? (
               numberOfRows.find((number) => number.value === value)?.label
             ) : (
@@ -79,8 +79,8 @@ const Combobox = () => {
               width={10}
               height={10}
             />
-          )}
-          {/* {value
+          )} */}
+          {value
             ? numberOfRows.find((number) => number.value === value)?.label
             : "10"}
           <Image
@@ -88,7 +88,7 @@ const Combobox = () => {
             alt="caret-down"
             width={10}
             height={10}
-          /> */}
+          />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[70px] p-0">
