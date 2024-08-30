@@ -8,11 +8,11 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
-        <Suspense fallback={<LoaderSpinner size={40} />}>
+      <Suspense fallback={<LoaderSpinner size={40} />}>
+        <main>
           <MainTable />
-        </Suspense>
-      </main>
+        </main>
+      </Suspense>
     </>
   );
 }
