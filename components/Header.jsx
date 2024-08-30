@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import Combobox from "./Combobox";
@@ -29,7 +30,15 @@ const Header = () => {
       </div>
       <div className="flex gap-3">
         <Button className="px-3 py-2 bg-violet-1 dark:hover:bg-accent dark:focus:bg-accent">
-          <p className="text-14 text-white-1 font-bold">Add Customer</p>
+          <div className="flex-center gap-2">
+            <Image
+              src="/icons/plus.svg"
+              alt="add-customer"
+              width={20}
+              height={20}
+            />
+            <span className="text-14 text-white-1 font-bold">Add Customer</span>
+          </div>
         </Button>
         <ModeToggle />
       </div>

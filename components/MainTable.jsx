@@ -65,14 +65,44 @@ const MainTable = () => {
             <TableHead className="text-black font-bold dark:text-white-1 flex-center">
               Tracking ID
             </TableHead>
-            <TableHead className="text-black font-bold dark:text-white-1">
-              Product
+            <TableHead>
+              <div className="flex items-center justify-between">
+                <span className="text-black font-bold dark:text-white-1">
+                  Product
+                </span>
+                <Image
+                  src="/icons/sort.svg"
+                  alt="sort"
+                  width={16}
+                  height={16}
+                />
+              </div>
             </TableHead>
-            <TableHead className="text-black font-bold dark:text-white-1">
-              Customer
+            <TableHead>
+              <div className="flex items-center justify-between">
+                <span className="text-black font-bold dark:text-white-1">
+                  Customer
+                </span>
+                <Image
+                  src="/icons/sort.svg"
+                  alt="sort"
+                  width={16}
+                  height={16}
+                />
+              </div>
             </TableHead>
-            <TableHead className="text-black font-bold dark:text-white-1">
-              Date
+            <TableHead>
+              <div className="flex items-center justify-between">
+                <span className="text-black font-bold dark:text-white-1">
+                  Date
+                </span>
+                <Image
+                  src="/icons/sort.svg"
+                  alt="sort"
+                  width={16}
+                  height={16}
+                />
+              </div>
             </TableHead>
             <TableHead className="text-black font-bold dark:text-white-1">
               Amount
@@ -80,8 +110,18 @@ const MainTable = () => {
             <TableHead className="text-black font-bold dark:text-white-1">
               Payment Mode
             </TableHead>
-            <TableHead className="text-black font-bold dark:text-white-1">
-              Status
+            <TableHead>
+              <div className="flex items-center justify-between">
+                <span className="text-black font-bold dark:text-white-1">
+                  Status
+                </span>
+                <Image
+                  src="/icons/sort.svg"
+                  alt="sort"
+                  width={16}
+                  height={16}
+                />
+              </div>
             </TableHead>
             <TableHead className="text-black font-bold dark:text-white-1 flex-center">
               <div className="flex-center">Action</div>
@@ -121,7 +161,22 @@ const MainTable = () => {
               <TableCell className=" ">{customer.paymentMode}</TableCell>
               <TableCell className=" ">{customer.status}</TableCell>
               <TableCell className="flex-center py-6.5">
-                {customer.status}
+                <div className="flex gap-4">
+                  <Image
+                    src="/icons/edit.svg"
+                    alt="edit"
+                    width={24}
+                    height={24}
+                    className="cursor-pointer"
+                  />
+                  <Image
+                    src="/icons/delete.svg"
+                    alt="edit"
+                    width={24}
+                    height={24}
+                    className="cursor-pointer"
+                  />
+                </div>
               </TableCell>
             </TableRow>
           ))}

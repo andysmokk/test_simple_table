@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
+import { CheckIcon } from "@radix-ui/react-icons";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -22,8 +22,8 @@ import { numberOfRows } from "@/constants/index";
 import LoaderSpinner from "@/components/LoaderSpinner";
 
 const Combobox = () => {
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -73,7 +73,12 @@ const Combobox = () => {
             </div>
           )}
           {!loading && (
-            <CaretSortIcon className="h-4 w-4 shrink-0 opacity-50" />
+            <Image
+              src="/icons/caret-down.svg"
+              alt="caret-down"
+              width={10}
+              height={10}
+            />
           )}
         </Button>
       </PopoverTrigger>
