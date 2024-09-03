@@ -8,14 +8,12 @@ import { Input } from "./ui/input";
 
 const Searchbar = () => {
   const searchParams = useSearchParams();
-  const [searchTerm, setSearchTerm] = useState(
-    searchParams.get("search") || ""
-  );
+  const searchTerm = searchParams.get("search") || "";
   const router = useRouter();
 
   const handleSearch = (e) => {
     const query = e.target.value;
-    setSearchTerm(query);
+
     const itemsCount = searchParams.get("itemsPerPage") || "10";
 
     if (query) {
